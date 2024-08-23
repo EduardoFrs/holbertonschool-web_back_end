@@ -11,16 +11,21 @@ def nginx_stats():
     db = client.logs
     collection = db.nginx
 
-    print(f'{collection.count_documents({})} logs')
+    total_logs = collection.count_documents({})
+    print(f'{total_logs} logs')
 
     print('Methods:')
-    print(f'\tmethod GET: {collection.count_documents({"method": "GET"})}')
-    print(f'\tmethod POST: {collection.count_documents({"method": "POST"})}')
-    print(f'\tmethod PUT: {collection.count_documents({"method": "PUT"})}')
-    print(f'\tmethod PATCH: {collection.count_documents({"method": "PATCH"})}')
-    print(f'\tmethod DELETE: {collection.count_documents({"method": "DELETE"})}')
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    for method in methods:
+        count = collection.count_documents({"method": method})
+        print(f'\tmethod {method}: {count}')
 
-    print(f'{collection.count_documents({"method": "GET", "path": "/status"})} status check')
+    status_check_query = {
+        "method": "GET",
+        "path": "/status"
+    }
+    status_check_count = collection.count_documents(status_check_query)
+    print(f'{status_check_count} status check')
 
 
 if __name__ == "__main__":
