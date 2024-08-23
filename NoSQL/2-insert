@@ -1,2 +1,2 @@
 // 2. Insert document
-db.coll.Insert({name: "Holberton school"})
+db.school.Insert({name: "Holberton school"})
