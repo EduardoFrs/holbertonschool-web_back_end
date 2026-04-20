@@ -35,9 +35,9 @@ class TestGithubOrgClient(unittest.TestCase):
             result = test_class._public_repos_url
             self.assertEqual(result, payload["repos_url"])
 
-     @patch('client.get_json')
+    @patch('client.get_json')
     def test_public_repos(self, mock_json):
-        """ Text more public repos """
+        """ Test more public repos """
         json_payload = [{"name": "Google"}, {"name": "Twitter"}]
         mock_json.return_value = json_payload
 
