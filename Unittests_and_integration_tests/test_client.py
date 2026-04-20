@@ -21,6 +21,6 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         mock_get_json.return_value = {"login": input}
         test_class = GithubOrgClient(input)
-        test_class.org
+        result = test_class.org
         self.assertEqual(result, {"login": input})
         mock_get_json.assert_called_once_with(f'https://api.github.com/orgs/{input}')
