@@ -8,6 +8,7 @@ from parameterized import parameterized
 
 from client import GithubOrgClient
 
+
 class TestGithubOrgClient(unittest.TestCase):
     """Gitghub ORG Client """
 
