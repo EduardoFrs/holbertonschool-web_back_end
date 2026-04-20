@@ -24,7 +24,9 @@ class TestGithubOrgClient(unittest.TestCase):
         test_class = GithubOrgClient(input)
         result = test_class.org
         self.assertEqual(result, {"login": input})
-        mock_get_json.assert_called_once_with(f'https://api.github.com/orgs/{input}')
+        mock_get_json.assert_called_once_with(
+            f'https://api.github.com/orgs/{input}'
+        )
 
     def test_public_repos_url(self):
         """ Test the public repo url """
