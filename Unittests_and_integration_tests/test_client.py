@@ -68,6 +68,7 @@ class TestGithubOrgClient(unittest.TestCase):
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
+
 @parameterized_class(TEST_PAYLOAD)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """Integration test for GithubOrgClient.public_repos"""
@@ -79,24 +80,19 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher = patch("requests.get")
         mock_get = cls.get_patcher.start()
 
-        def side_effect(url):
-            """Return correct fixture depending on URL"""
-            mock_response = Mock()
+    def side_effect(url):
+        """Return correct fixture depending on URL"""
+        mock_response = Mock()
 
-            # 1. Org request
-            if url == "https://api.github.com/orgs/google":
-                mock_response.json.return_value = cls.org_payload
+        if url == "https://api.github.com/orgs/google":
+            mock_response.json.return_value = cls.org_payload
 
-            # 2. repos_url request
-            elif url == cls.org_payload["repos_url"]:
-                mock_response.json.return_value = cls.repos_payload
+        elif url == cls.org_payload["repos_url"]:
+            mock_response.json.return_value = cls.repos_payload
 
-            else:
-                mock_response.json.return_value = {}
+        return mock_response
 
-            return mock_response
-
-        mock_get.side_effect = side_effect
+    mock_get.side_effect = side_effect
 
     @classmethod
     def tearDownClass(cls):
