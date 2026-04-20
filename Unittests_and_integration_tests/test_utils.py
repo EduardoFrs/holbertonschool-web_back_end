@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Unit test"""
 
-import unittest
+import unittest, requests
 
 from unittest.mock import patch
-from parameterized import parameterized
-from utils import access_nested_map
+from parameterized import parameterized, parameterized_class
+from utils import access_nested_map, get_json
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -40,3 +40,4 @@ class TestGetJson(unittest.TestCase):
         with patch('requests.get') as mock_request:
             mock_request.return_value.json.return_value = test_payload
             self.assertEqual(get_json(url=test_url), test_payload)
+            mock_request.assert_called_once_with(test_url)
