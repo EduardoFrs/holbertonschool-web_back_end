@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Unit test"""
 
-import unittest, requests
+import unittest
+import requests
 
 from unittest.mock import patch
 from parameterized import parameterized, parameterized_class
@@ -28,6 +29,7 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path), expected
 
+
 class TestGetJson(unittest.TestCase):
     """ Test JSON """
 
@@ -41,6 +43,7 @@ class TestGetJson(unittest.TestCase):
             mock_request.return_value.json.return_value = test_payload
             self.assertEqual(get_json(url=test_url), test_payload)
             mock_request.assert_called_once_with(test_url)
+
 
 class TestMemoize(unittest.TestCase):
     """Test Class to memoize"""
