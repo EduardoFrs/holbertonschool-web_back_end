@@ -25,3 +25,11 @@ class Cache:
         if fn:
             return fn(value)
         return value
+
+    def get_str(self, key: str) -> str:
+        """Convert str"""
+        return self.get(key, str)
+
+    def get_int(self, key: str) -> int:
+        """Convert int"""
+        return self.get(key, int)
